@@ -222,8 +222,11 @@ thm &lt;- theme_tufte() +
   )
 theme_set(thm)
 
-# load and examine data
+# options to load and examine data
+## use one of these lines
 D &lt;- read_csv(here(&quot;data&quot;,&quot;example_dat.csv&quot;))
+# D &lt;- read_csv(&quot;change path to directoty that includes data&quot;)
+# D &lt;- read.csv(&quot;change path to directoty that includes data&quot;)
 
 D %&gt;% print(n=16)</code></pre>
 <pre><code>## # A tibble: 44,645 x 10
@@ -284,7 +287,7 @@ D$p_num &lt;- glm(X ~ as.factor(int),data=D,family=binomial(link=&quot;logit&quo
 ## 15     2     3  3        0     1     1     1     0      2         0  0.698 0.384
 ## 16     2     4  3.21     1     0     1     1     1      3         1  0.534 0.386
 ## # … with 44,629 more rows</code></pre>
-<p>Next, we create the stabilized and unstabilzed weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposured, their numerator should be <code>p_num</code> and their denominator should be <code>pscore</code>. If they are instead unexposed, their numerator should be <code>1 - p_num</code> and their denominator should be <code>1 - pscore</code>:</p>
+<p>Next, we create the stabilized and unstabilzed weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposed, their numerator should be <code>p_num</code> and their denominator should be <code>pscore</code>. If they are instead unexposed, their numerator should be <code>1 - p_num</code> and their denominator should be <code>1 - pscore</code>:</p>
 <pre class="r"><code>D &lt;- D %&gt;% group_by(ID) %&gt;% 
   mutate(num = X*p_num + (1-X)*(1-p_num),
          den = X*pscore + (1-X)*(1-pscore),
@@ -312,6 +315,8 @@ D$p_num &lt;- glm(X ~ as.factor(int),data=D,family=binomial(link=&quot;logit&quo
 ## 15     2  3        0  0.698 0.384 0.616 0.302 1.97    11.5 
 ## 16     2  3.21     1  0.534 0.386 0.386 0.534 1.42    21.6 
 ## # … with 44,629 more rows</code></pre>
+<p>A quick note on the difference between stabilized and unstabilized weights. In a weighted analysis, the sample size contribution of each row is increased (or decreased) by its weight. With unstabilized weights, the sample size contribution for a given row can quickly outweight the sample. For example, the unstablized weight for the last observation for ID = 1 is 3914. This is nearly 80% of the sample size of 5,000! In contrast, the stabilized weight for the sample observation and row is 2.12.</p>
+<p>Because of this problem with unstablized weights, the general recommendation is to use always stabilized weights.</p>
 <p>With our weights created, the next step is to evaluate the distribution of the weights and the propensity score. This step is important because it’s one of the ways in which we can evaluate whether <strong>positivity</strong> holds. Recall that positivity requires that there be exposed and unexposed individuals within all confounder strata at all time points. Expressed mathematically, positivity requires that the probability of being exposed conditional on all confounders is bounded away from zero and one for all individuals over all time points:</p>
 <p><span class="math display">\[0 &lt; P(X_j = 1 \mid X_{j-1}, Z_j, Z_{j-1}) &lt; 1, \forall j.\]</span> Why is this important? Suppose that for a certain exposed individual <span class="math inline">\(i\)</span>, the probability of being exposed is zero. When we create the weights for this person, we end up with an expression that looks like this: <span class="math display">\[w_i = \frac{1}{P(X_j = 1 \mid X_{j-1}, Z_j, Z_{j-1})} = \frac{1}{0},\]</span> which is undefined. In fact, because of this, the conditional probability of being exposed can’t even be close to zero. If, for example, this probability is <span class="math inline">\(0.0001\)</span>, then the weight becomes: <span class="math display">\[w_i = \frac{1}{P(X_j = 1 \mid X_{j-1}, Z_j, Z_{j-1})} = \frac{1}{0.0001} = 10,000.\]</span> This means that in a dataset like ours, with 5000 individuals, one individual’s person-time contribution will be counted 10,000 times, which will have an overwhelming impact on our estimate of the causal effect.</p>
 <p>There are a few techniques we can use to evaluate whether such problematic weights exist. As a first step, we can simply look at the distribution of the propensity score:</p>
@@ -381,6 +386,10 @@ coeftest(mod1_plr, vcov = vcovCL(mod1_plr, cluster=D$ID, type = &quot;HC1&quot;)
 <li>What is the magnitude of the association between <span class="math inline">\(Z_j\)</span> and <span class="math inline">\(X_j\)</span> in the unweighted data? What happens to the magnitude of this association in the weighted data? (report coefficients and appropriate standard errors)</li>
 </ol>
 </div>
+</div>
+<div id="g-computation" class="section level1">
+<h1>g Computation</h1>
+<p>In our next example, we’ll look at using g computation to analyze the same data.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>

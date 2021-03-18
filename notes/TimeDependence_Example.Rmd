@@ -47,8 +47,11 @@ thm <- theme_tufte() +
   )
 theme_set(thm)
 
-# load and examine data
+# options to load and examine data
+## use one of these lines
 D <- read_csv(here("data","example_dat.csv"))
+# D <- read_csv("change path to directoty that includes data")
+# D <- read.csv("change path to directoty that includes data")
 
 D %>% print(n=16)
 
@@ -104,7 +107,7 @@ Let's take a look at the dataset now that it has the propensity score:
 D %>% print(n=16)
 ```
 
-Next, we create the stabilized and unstabilzed weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposured, their numerator should be `p_num` and their denominator should be `pscore`. If they are instead unexposed, their numerator should be `1 - p_num` and their denominator should be `1 - pscore`:
+Next, we create the stabilized and unstabilzed weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposed, their numerator should be `p_num` and their denominator should be `pscore`. If they are instead unexposed, their numerator should be `1 - p_num` and their denominator should be `1 - pscore`:
 ```{r}
 D <- D %>% group_by(ID) %>% 
   mutate(num = X*p_num + (1-X)*(1-p_num),
@@ -117,6 +120,10 @@ D <- D %>% group_by(ID) %>%
 ```{r}
 D %>% select(ID, time, X, pscore, p_num, num, den, sw, w) %>% print(n=16)
 ```
+
+A quick note on the difference between stabilized and unstabilized weights. In a weighted analysis, the sample size contribution of each row is increased (or decreased) by its weight. With unstabilized weights, the sample size contribution for a given row can quickly outweight the sample. For example, the unstablized weight for the last observation for ID = 1 is `r D %>% filter(ID==1,int==12) %>% select(w) %>% round(.,0)`. This is nearly 80% of the sample size of 5,000! In contrast, the stabilized weight for the sample observation and row is `r D %>% filter(ID==1,int==12) %>% select(sw) %>% round(.,2)`.
+
+Because of this problem with unstablized weights, the general recommendation is to use always stabilized weights.
 
 With our weights created, the next step is to evaluate the distribution of the weights and the propensity score. This step is important because it's one of the ways in which we can evaluate whether **positivity** holds. Recall that positivity requires that there be exposed and unexposed individuals within all confounder strata at all time points. Expressed mathematically, positivity requires that the probability of being exposed conditional on all confounders is bounded away from zero and one for all individuals over all time points:
 
