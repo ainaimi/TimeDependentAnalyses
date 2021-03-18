@@ -23,7 +23,7 @@ We will start by loading some relevant packages in R:
 # install and load packages
 packages <- c("data.table","tidyverse","skimr",
               "here","ggthemes","extrafont","survival",
-              "sandwich","lmtest")
+              "sandwich","lmtest","survminer")
 
 for (package in packages) {
   if (!require(package, character.only=T, quietly=T)) {
@@ -107,7 +107,7 @@ Let's take a look at the dataset now that it has the propensity score:
 D %>% print(n=16)
 ```
 
-Next, we create the stabilized and unstabilzed weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposed, their numerator should be `p_num` and their denominator should be `pscore`. If they are instead unexposed, their numerator should be `1 - p_num` and their denominator should be `1 - pscore`:
+Next, we create the stabilized and unstabilized weights. To do this, we first obtain the probability of the observed exposure. That is, in a given time point, if a person is exposed, their numerator should be `p_num` and their denominator should be `pscore`. If they are instead unexposed, their numerator should be `1 - p_num` and their denominator should be `1 - pscore`:
 ```{r}
 D <- D %>% group_by(ID) %>% 
   mutate(num = X*p_num + (1-X)*(1-p_num),
@@ -205,12 +205,207 @@ BONUS
 
 # g Computation
 
-In our next example, we'll look at using g computation to analyze the same data. 
+In our next example, we'll look at using g computation to analyze the same data. The best approach is to start with a table documenting all relevant variables that need to be modeled. This is basically every node in the DAG, ranked according to their causal order:
+
+
+|Order |Dependent Variable      | Independent Variable |
+|:-----|:-----------------------|:---------------------|
+| 3    |$Y_j$                   | $X_j, Z_j X_{j-1}$   |
+| 2    |$X_j$                   | $Z_j, X_{j-1}$       |
+| 1    |$Z_j$                   | $X_{j-1}$            |
+
+To begin our exploration of g computation, let's start with fitting the models we'll need:
 
 ```{r}
 
+D <- D %>% select(ID,int,time,Y,X,Z,Xm1,Zm1,last_flag)
+
+# model for the outcome
+modY <- glm(Y ~ as.factor(int) + X + Z + Xm1 + Zm1, data=D, family=binomial("logit"))
+
+# model for the exposure
+modX <- glm(X ~ as.factor(int) + Z + Xm1 + Zm1, data=D, family=binomial("logit"))
+
+# model for the confounder
+modZ <- glm(Z ~ as.factor(int) + Xm1 + Zm1, data=D, family=binomial("logit"))
+
 ```
 
+Note that the above model for the outcome cannot be used to quantify the effect of $X$ on $Y$, because it includes $Z$, which opens a collider bias path as shown in the DAG. But we can use all three models together to get an estimate of the average of $Y$ under different scenarios for $X$. 
 
+To give some intuition behind how the g computation procedure will work, let's take the first observation for the first individual in the dataset:
+
+```{r}
+
+obs <- D[1,]
+
+obs
+
+```
+
+We can use `modZ`, `modX`, and `modY` to predict the second observation for this first individual, like this:
+
+```{r}
+
+dZp <- data.table(Xm1=obs$X, Zm1=obs$Z, int=as.factor(2))
+Zp <- as.numeric(predict(modZ,newdata=dZp,type="response")>runif(1))
+
+dXp <- data.table(Xm1=obs$X, Zm1=obs$Z, Z=Zp, int=as.factor(2))
+Xp <- as.numeric(predict(modX,newdata=dXp,type="response")>runif(1))
+
+dYp <- data.table(Xm1=obs$X, Zm1=obs$Z, Z=Zp, X=Xp, int=as.factor(2))
+Yp <- as.numeric(predict(modZ,newdata=dZp,type="response")>runif(1))
+```
+
+If we combined these predicted second time-point data with the first time-point data, we would get a dataset that looks like this:
+
+```{r}
+rbind(obs,data.frame(ID=1, int=2, time=2, Y=Yp, X=Xp, Z=Zp, Xm1=obs$X, Zm1=obs$Z, last_flag=0))
+```
+
+Note that all the relevant variables in the second time-point were obtained from model predictions. Using these models predictions, we could continue the process until we reached the end of follow-up (time point 12 in our case), or until the event occurred ($Y = 1$). While it may not be clear yet, this procedure is the core of g computation.
+
+Let's build this small example into a bigger working illustration g computation. First, we'll select the first observation for each person in the dataset. This should lead to a dataset with 5,000 observations that reflect the first measurement for each variable.
+
+
+```{r, message=F, warning=F}
+
+set.seed(123)
+
+dat <- D %>% filter(int==1) 
+dat$id <- 1:nrow(dat)
+
+pgf<-function(ii, mc_data, lngth, exposure = NULL){
+    d <- mc_data
+    d <- d[d$id==ii,]
+    
+    lngth <- lngth
+    Zp <- Xp <- Yp <- mm <- numeric() 
+    mm[1] <- j <- 1
+    id <- d$id
+    
+    Zp <- d$Z
+
+    if (is.null(exposure)) {
+      Xp[1] <- d$X
+    } else{
+      Xp[1] <- exposure
+    }
+
+    Yp[1] <- d$Y
+    
+    for (j in 2:lngth) {
+      #cat("Iteration",j,"for observation",ii,"from Monte Carlo Data",'\n')
+      if (Yp[j - 1]==0) {
+        Xl=Xp[j-1];Zl=Zp[j-1]
+
+        #cat("Generating Z",'\n')
+        dZp <- data.table(Xm1=Xl, Zm1=Zl,int=as.factor(j))
+        Zp[j] <- as.numeric(predict(modZ,newdata=dZp,type="response")>runif(1))
+
+        #cat("Generating X",'\n')
+        dXp <- data.table(Z=Zp[j], Zm1=Zl, Xm1=Xp[j-1], int=as.factor(j))
+         if (is.null(exposure)) {
+             Xp[j] <- as.numeric(predict(modX,newdata=dXp,type="response")>runif(1))
+          } else{
+             Xp[j] <- exposure
+          }
+        
+        #cat("Generating Y",'\n')
+        dYp <- data.table(X=Xp[j], Z=Zp[j], Xm1=Xp[j-1], Zm1=Zl, int=as.factor(j))
+        Yp[j] <- as.numeric(predict(modY,newdata=dYp,type="response")>runif(1))
+
+      } else {
+        break
+      }
+      mm[j] <- j
+    }
+    gdat <- data.table(id,mm,Zp,Xp,Yp)
+    gdat$last<-as.numeric(!(gdat$Yp==0)|gdat$mm==lngth)
+    return(gdat)
+  }
+
+gComp_dat <- lapply(1:nrow(dat), function(x) pgf(x, mc_data=dat, lngth=12, exposure = NULL))
+gComp_dat <- do.call(rbind,gComp_dat)
+
+head(gComp_dat,20)
+
+
+```
+
+Let's take a look at some summary statistics from the `gComp_dat`, and compare the same statistics in the original data:
+
+```{r}
+
+D %>% filter(last_flag==1) %>% summarize(meanY=mean(Y))
+gComp_dat %>% filter(last==1) %>% summarize(meanY=mean(Yp))
+
+fitD <- coxph(Surv(int, Y) ~ 1, data = D) 
+expfitD <- survfit(fitD)
+
+plot_dat0 <- data.frame(cum_prob=1-expfitD$surv, time=expfitD$time, Scenario="Original Data")
+
+fitG <- coxph(Surv(mm, Yp) ~ 1, data = gComp_dat)
+expfitG <- survfit(fitG)
+
+plot_dat1 <- data.frame(cum_prob=1-expfitG$surv, time=expfitG$time, Scenario="Natural Course")
+
+plot_dat <- rbind(plot_dat0,plot_dat1)
+```
+
+Let's plot the cumulative probabilities of the event over time in the original data, and in the data we obtained via g computation:
+
+```{r, out.width="500px", fig.align="center"}
+ggplot(plot_dat) + geom_step(aes(x=time,y=cum_prob,group=Scenario,color=Scenario))
+```
+
+This figure shows us that g computation is able to reproduce what we observe in the data. This is an important validation step, known as the natural course comparison. If the CDFs in the above figure did not overlap well, it would signal to us that we had work to do with our models, such as adding or taking away flexibility, adding interactions, etc. 
+
+Now let's use g computation to estimate the effect we're interested in. We do this by setting the exposure value to 1 and then to 0, instead of predicting the exposure value from the exposure model:
+
+```{r}
+
+set.seed(123)
+
+gComp_dat0 <- lapply(1:nrow(dat), function(x) pgf(x, mc_data=dat, lngth=12, exposure = 0))
+gComp_dat0 <- do.call(rbind,gComp_dat0)
+
+head(gComp_dat0,20)
+
+gComp_dat1 <- lapply(1:nrow(dat), function(x) pgf(x, mc_data=dat, lngth=12, exposure = 1))
+gComp_dat1 <- do.call(rbind,gComp_dat1)
+
+head(gComp_dat1,20)
+
+```
+
+We can estimate the HR by combining `gComp_dat0` and `gComp_dat1` into a single dataset, with an exposure value:
+
+```{r}
+
+gComp_dat01 <- rbind(gComp_dat0,gComp_dat1) %>% filter(last==1)
+
+gComp_dat01
+
+cox_gComp <- coxph(Surv(mm,Yp) ~ Xp, data=gComp_dat01, ties="efron")
+
+summary(cox_gComp)$coefficients
+
+```
+
+Running the Cox model in the data created by the g computation algorithm yields a hazard ratio of `r round(summary(cox_gComp)$coefficients[2],2)`, which is very close to the estimates obtained from the marginal structural models above, as well as the true HR of 2.5. 
+
+To get confidence intervals for this point estimate, we have no choice but to bootstrap. This would require resampling the individuals in the original dataset, re-running the models used to predict in the g computation algorithm, re-run the `pgf` function, and then the Cox model to obtain a bootstrapped estimate. Running this procedure 500 times would give us a distribution of 500 point estimates that we could use to compute the standard deviation, which could be interpreted as the standard error of our original estimate.
+
+There are several final considerations we should raise about g computation. First, in the above code, we obtained cumulative distribution functions and hazard ratios. This is one of the points of versatility with g computation. It's relatively easy to obtain the estimand on any scale we'd like (risk, odds, hazard, differences or ratios). 
+
+As a final note, one might legitimately ask why g computation works. After all, the regression model for $Y$ includes $Z$, and the estimate for $X$ in that model is thus subject to collider bias. 
+
+One can see why g computation works via single world intervention graphs (SWIGs) [@Richardson2013]. The graph below shows why. The key feature is that g computation incorporates a model for $Z$ in the estimation process. In doing so, the effect of $X$ on $Z$ is accounted for. 
+
+
+```{r, out.width = "600px", fig.align='center', fig.cap="Single World Intervention Graph demonstrating why the g computation algorithms works in the presence of variables that are both time-varying confounders and mediators, and can also induce collider bias if adjusted for.",echo=F}
+knitr::include_graphics("../figures/swig.png")
+```
 
 # References
