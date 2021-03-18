@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  1 MAR 2021 12:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  15 MAR 2021 18:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -527,23 +527,15 @@ Package: nicefrac 1998/08/04 v0.9b Nice fractions
 ))
 \cslhangindent=\skip99
 \csllabelwidth=\skip100
-(/usr/local/texlive/2020/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count290
-\FV@InFile=\read2
-\FV@TabBox=\box97
-\c@FancyVerbLine=\count291
-\FV@StepNumber=\count292
-\FV@OutFile=\write3
-) (/usr/local/texlive/2020/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box98
-\UL@hyphenbox=\box99
+(/usr/local/texlive/2020/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box97
+\UL@hyphenbox=\box98
 \UL@skip=\skip101
 \UL@hook=\toks28
 \UL@height=\dimen189
-\UL@pe=\count293
+\UL@pe=\count290
 \UL@pixel=\dimen190
-\ULC@box=\box100
+\ULC@box=\box99
 Package: ulem 2019/11/18
 \ULdepth=\dimen191
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/morefloats/morefloats.sty
@@ -554,31 +546,31 @@ Package morefloats Info: Maximum number of possible floats asked for: 36
 (morefloats)             (in which case it will notify you).
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count294
-\l__pdf_internal_box=\box101
+\l__kernel_color_stack_int=\count291
+\l__pdf_internal_box=\box100
 ) (./Time_Dependence.aux)
 \openout1 = `Time_Dependence.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 138.
-LaTeX Font Info:    ... okay on input line 138.
-\AtBeginShipoutBox=\box102
-Package hyperref Info: Link coloring OFF on input line 138.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 100.
+LaTeX Font Info:    ... okay on input line 100.
+\AtBeginShipoutBox=\box101
+Package hyperref Info: Link coloring OFF on input line 100.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -588,17 +580,17 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count295
+\c@section@level=\count292
 )
-LaTeX Info: Redefining \ref on input line 138.
-LaTeX Info: Redefining \pageref on input line 138.
-LaTeX Info: Redefining \nameref on input line 138.
+LaTeX Info: Redefining \ref on input line 100.
+LaTeX Info: Redefining \pageref on input line 100.
+LaTeX Info: Redefining \nameref on input line 100.
 (./Time_Dependence.out) (./Time_Dependence.out)
-\@outlinefile=\write4
-\openout4 = `Time_Dependence.out'.
+\@outlinefile=\write3
+\openout3 = `Time_Dependence.out'.
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 138.
+LaTeX Info: Redefining \selectfont on input line 100.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -635,16 +627,16 @@ LaTeX Info: Redefining \selectfont on input line 138.
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count296
+\scratchcounter=\count293
 \scratchdimen=\dimen192
-\scratchbox=\box103
-\nofMPsegments=\count297
-\nofMParguments=\count298
+\scratchbox=\box102
+\nofMPsegments=\count294
+\nofMParguments=\count295
 \everyMPshowfont=\toks29
-\MPscratchCnt=\count299
+\MPscratchCnt=\count296
 \MPscratchDim=\dimen193
-\MPnumerator=\count300
-\makeMPintoPDFobject=\count301
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
 \everyMPtoPDFconversion=\toks30
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -659,102 +651,110 @@ e
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 
-148.
+131.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
 LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
-148.
+131.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
-148.
+131.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
-148.
+131.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-148.
+131.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 148.
+(Font)              scaled to size 10.42007pt on input line 131.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 148.
+(Font)              scaled to size 7.91925pt on input line 131.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 148.
+(Font)              scaled to size 6.25204pt on input line 131.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 148.
+(Font)              scaled to size 10.42007pt on input line 131.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 148.
+(Font)              scaled to size 7.91925pt on input line 131.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 148.
+(Font)              scaled to size 6.25204pt on input line 131.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 131.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 131.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 131.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 131.
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+[2]
+
+LaTeX Warning: Marginpar on page 3 moved.
+
 LaTeX Font Info:    Trying to load font information for TS1+pplj on input line 
-151.
+182.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1pplj.fd
 File: ts1pplj.fd 2004/09/06 font definitions for TS1/pplj.
-) [2]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 181.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 181.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 181.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 181.
-
-LaTeX Warning: Marginpar on page 3 moved.
-
-
-LaTeX Warning: Marginpar on page 3 moved.
-
-
-LaTeX Warning: Marginpar on page 3 moved.
-
-[3]
+) [3]
 
 LaTeX Warning: Marginpar on page 4 moved.
 
 [4]
-
-LaTeX Warning: Marginpar on page 5 moved.
-
-[5]
-</Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf, id=31, 289.08pt x 
+</Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf, id=39, 289.08pt x 
 108.405pt>
 File: /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf Graphic file (
 type pdf)
 <use /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf>
 Package pdftex.def Info: /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1
-.pdf  used on input line 293.
+.pdf  used on input line 242.
 (pdftex.def)             Requested size: 200.74901pt x 75.28087pt.
-</Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F2.pdf, id=32, 289.08pt x 
+</Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F2.pdf, id=40, 289.08pt x 
 108.405pt>
 File: /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F2.pdf Graphic file (
 type pdf)
 <use /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F2.pdf>
 Package pdftex.def Info: /Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F2
-.pdf  used on input line 302.
+.pdf  used on input line 251.
 (pdftex.def)             Requested size: 200.74901pt x 75.28087pt.
+
+LaTeX Warning: Marginpar on page 5 moved.
+
+[5 </Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf> </Users/AIN8/Dr
+opbox/Teaching/TimeDependence/figures/F2.pdf>]
 
 LaTeX Warning: Marginpar on page 6 moved.
 
-[6 </Users/AIN8/Dropbox/Teaching/TimeDependence/figures/F1.pdf> </Users/AIN8/Dr
-opbox/Teaching/TimeDependence/figures/F2.pdf>] [7]
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 394.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 394.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 394.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 394.
+[6]
+
+LaTeX Warning: Marginpar on page 7 moved.
+
+
+Package natbib Warning: Citation `Daniel2013' undefined on input line 349.
+
+
+LaTeX Warning: Marginpar on page 7 moved.
+
+
+LaTeX Warning: Marginpar on page 7 moved.
+
+[7]
 
 LaTeX Warning: Marginpar on page 8 moved.
 
@@ -763,61 +763,130 @@ LaTeX Warning: Marginpar on page 8 moved.
 LaTeX Warning: Marginpar on page 9 moved.
 
 [9] [10]
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 50
-5.
-(/usr/local/texlive/2020/texmf-dist/tex/latex/bera/t1fvm.fd
-File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
-)
-LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.50006pt on input line 505.
-LaTeX Font Info:    Font shape `T1/fvm/m/it' in size <10> not available
-(Font)              Font shape `T1/fvm/m/sl' tried instead on input line 506.
-LaTeX Font Info:    Font shape `T1/fvm/m/sl' will be
-(Font)              scaled to size 8.50006pt on input line 506.
-LaTeX Font Info:    Font shape `T1/fvm/b/n' will be
-(Font)              scaled to size 8.50006pt on input line 507.
-[11] [12]
+Overfull \hbox (25.42838pt too wide) detected at line 544
+[]
+ []
+
+[11]
+
+LaTeX Warning: Marginpar on page 12 moved.
+
+[12] [13]
+Overfull \hbox (28.73935pt too wide) detected at line 680
+[][]
+ []
+
+
+Package natbib Warning: Citation `Robins2009' undefined on input line 688.
+
+
+LaTeX Warning: Marginpar on page 14 moved.
+
+
+LaTeX Warning: Reference `ex2' on page 14 undefined on input line 700.
+
+
+Package natbib Warning: Citation `Vansteelandt2015' undefined on input line 705
+.
+
+[14]
+
+LaTeX Warning: Marginpar on page 15 moved.
+
+
+Package natbib Warning: Citation `Wasserman2006' undefined on input line 716.
+
+
+LaTeX Warning: Marginpar on page 15 moved.
+
+[15] [16]
+
+Package natbib Warning: Citation `Robins2009' undefined on input line 810.
+
+pdfTeX warning (ext4): destination with the same identifier (name{cite.Robins20
+09}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.810 ...y Robins and Hern'\{a\}n\cite{Robins2009}
+                                                   and
+
+Package natbib Warning: Citation `Hernan2015' undefined on input line 811.
+
+
+Package natbib Warning: Citation `Daniel2013' undefined on input line 812.
+
+pdfTeX warning (ext4): destination with the same identifier (name{cite.Daniel20
+13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.812 tutorial\cite{Daniel2013}
+                                may then be of further use. G methods are
+
+Package natbib Warning: Citation `Suarez2011' undefined on input line 813.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+
+LaTeX Warning: Marginpar on page 17 moved.
+
+[17] [18]
+
+Package natbib Warning: There were undefined citations.
+
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 667.
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 667.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 932.
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 932.
 (./Time_Dependence.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 667.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 667.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 932.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 932.
 Package rerunfilecheck Info: File `Time_Dependence.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 667.
+(rerunfilecheck)             Checksum: D26C55F81A9C0C346F8B947783B5A168;429.
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 932.
  ) 
 Here is how much of TeX's memory you used:
- 13993 strings out of 480608
- 200077 string characters out of 5903631
- 482333 words of memory out of 5000000
- 29488 multiletter control sequences out of 15000+600000
- 612822 words of font info for 159 fonts, out of 8000000 for 9000
+ 13579 strings out of 480608
+ 193767 string characters out of 5903631
+ 480126 words of memory out of 5000000
+ 29062 multiletter control sequences out of 15000+600000
+ 599121 words of font info for 131 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 52i,12n,51p,635b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 52i,15n,51p,882b,420s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
-xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/tex
+xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
 live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
 e/2020/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texlive/202
-0/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/texmf-
-dist/fonts/type1/public/bera/fvmb8a.pfb></usr/local/texlive/2020/texmf-dist/fon
-ts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1
-/public/bera/fvmro8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public
-/cm-super/sfrm1200.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/pala
-tino/uplb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/palatino/up
-lr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/palatino/uplri8a.p
-fb>
-Output written on Time_Dependence.pdf (13 pages, 158872 bytes).
+0/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2020/te
+xmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/texmf-dist
+/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/
+type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/u
+rw/palatino/uplri8a.pfb>
+Output written on Time_Dependence.pdf (19 pages, 174476 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 2059 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 229 PDF objects out of 1000 (max. 8388607)
+ 186 compressed objects within 2 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 1059 words of extra memory for PDF output out of 10000 (max. 10000000)
 
